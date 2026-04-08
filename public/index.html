@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Portal - City District Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+  <!-- Clean medical background -->
+  <div class="background-grid"></div>
+
+  <div class="app-wrapper">
+    <header class="top-navbar">
+      <div class="top-left">
+        <div class="guide-tab">
+          <span class="guide-icon">ℹ️</span>
+          <div class="guide-content">
+            <strong>Quick Guide:</strong> Describe symptoms ➜ AI Triage ➜ Get Ticket
+          </div>
+        </div>
+      </div>
+      
+      <div class="top-center">
+        <div class="hospital-logo">
+          <span class="logo-plus">✚</span>
+          <span>City District Hospital</span>
+        </div>
+      </div>
+
+      <div class="top-right">
+        <button id="emergencyTrigger" class="emergency-btn-top">
+          <span class="blink">🚨</span> Emergency Support
+        </button>
+      </div>
+    </header>
+
+    <main class="main-portal">
+      <header class="page-intro">
+        <h1>Patient Triage Portal</h1>
+        <p>AI-Powered Intelligent Triage & Real-time Queue Tracking</p>
+      </header>
+
+      <div class="portal-grid">
+        <!-- Main Panel -->
+        <div class="panel-left">
+          
+          <div id="checkinView">
+            <div id="formSection" class="glass-panel portal-card">
+              <form id="complaintForm" class="complaint-form">
+                <div class="input-group">
+                  <label for="patientName">Patient Name</label>
+                  <input type="text" id="patientName" placeholder="Enter your name" required>
+                </div>
+
+                <div class="split-inputs">
+                  <div class="input-group">
+                    <label for="patientAge">Age</label>
+                    <input type="number" id="patientAge" placeholder="Age" required min="1" max="120">
+                  </div>
+                  <div class="input-group">
+                    <label for="painLevel">Pain Level</label>
+                    <select id="painLevel" required>
+                      <option value="" disabled selected>Select level...</option>
+                      <option value="Mild (Bearable)">Mild (Bearable)</option>
+                      <option value="Moderate (Uncomfortable)">Moderate (Uncomfortable)</option>
+                      <option value="Severe (Not Bearable)">Severe (Not Bearable)</option>
+                      <option value="Extreme (Agonizing)">Extreme (Agonizing)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="complaintText">Describe your symptoms:</label>
+                  <textarea id="complaintText" rows="4" placeholder="e.g. My chest is hurting and I feel short of breath..." required></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-primary">
+                  <span class="btn-text">Check-in & Get Ticket</span>
+                  <div class="loader hidden"></div>
+                </button>
+              </form>
+            </div>
+
+            <!-- TICKET UI -->
+            <div id="resultPanel" class="glass-panel result-panel hidden">
+              <div id="emergencyAlert" class="emergency-alert hidden">
+                <h2>🚨 EMERGENCY DETECTED 🚨</h2>
+                <p>Immediate attention required. Please proceed to the Emergency Room.</p>
+                <p class="ticket-id-large" id="emergencyTicketId">ID: --</p>
+              </div>
+
+              <div id="standardResult" class="ticket">
+                <div class="ticket-header">
+                  <h3>Hospital Digital Ticket</h3>
+                  <p class="ticket-id" id="ticketId">P1000</p>
+                </div>
+                <div class="ticket-body">
+                  <div class="ticket-row">
+                    <span class="ticket-label">Recommended Dept</span>
+                    <span class="ticket-value highlight-text" id="deptValue">--</span>
+                  </div>
+                  <div class="ticket-row">
+                    <span class="ticket-label">AI Priority Score</span>
+                    <span class="ticket-value" id="priorityValue">--</span>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="ticket-row time-row">
+                    <span class="ticket-label">Est. Wait Time</span>
+                    <span class="ticket-value huge-time" id="waitTimeValue">-- mins</span>
+                  </div>
+                  <div class="ticket-row live-row">
+                    <span class="ticket-label live-indicator">🔴 LIVE Position</span>
+                    <span class="ticket-value live-pos" id="queuePos">--</span>
+                  </div>
+                  <p class="queue-info"><span id="totalQueue">--</span> patients in queue</p>
+                </div>
+                <div class="ticket-footer">
+                  <span id="confidencePill" class="pill">Confidence: --</span>
+                  <p id="reasonText" class="reason-text"></p>
+                </div>
+              </div>
+
+              <button id="resetBtn" class="btn-secondary">New Triage Request</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel-right" id="rightInsightsPanel">
+          <div class="info-card stats-card">
+            <div class="card-header">
+              <h3>Live Queue Overview</h3>
+              <span class="live-tag">Live</span>
+            </div>
+            <p class="card-hint">Current wait times per department</p>
+            <div id="liveStatsContainer" class="stats-list">
+              <!-- Dynamically populated -->
+              <div class="stat-item loading">Loading hospital data...</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- EMERGENCY MODAL -->
+    <div id="emergencyModal" class="modal-overlay hidden">
+      <div class="modal-content emergency-content">
+        <div class="modal-header header-red">
+          <h2>🚨 EMERGENCY RESPONSE</h2>
+          <button id="closeEmergency" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="emergency-notice">
+            <p><strong>If you are experiencing life-threatening symptoms, do not use the online checklist. Call for help immediately.</strong></p>
+          </div>
+          
+          <div class="hotline-grid">
+            <div class="hotline-card">
+              <span class="hl-label">General Emergency</span>
+              <a href="tel:911" class="hl-number">911</a>
+            </div>
+            <div class="hotline-card">
+              <span class="hl-label">Ambulance Dispatch</span>
+              <a href="tel:102" class="hl-number">102</a>
+            </div>
+            <div class="hotline-card">
+              <span class="hl-label">Hospital ER Direct</span>
+              <a href="tel:+15551234567" class="hl-number">(555) 123-4567</a>
+            </div>
+          </div>
+
+          <div class="location-box">
+            <h4>🚑 Our Location</h4>
+            <p>123 Medical Avenue, Central District, City Health Point</p>
+            <p class="sub-text">Our ER is open 24/7 for walk-ins.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-primary btn-full" id="acknowledgeBtn">I Understand</button>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="app-footer">
+      <p>&copy; 2026 City District Hospital AI Portal | v4.0 Gemini Pro</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

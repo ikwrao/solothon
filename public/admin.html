@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Admin - Queues</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="background-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <main class="container admin-container">
+    <header class="glass-header">
+      <h1>Admin Dashboard</h1>
+      <p>Live Department Queues</p>
+      <button id="clearAllBtn" class="btn-secondary" style="margin-top: 10px; width: auto; padding: 8px 16px;">Clear All Queues (Reset)</button>
+    </header>
+
+    <div id="departmentsContainer" class="departments-grid">
+      <!-- Generated via JS -->
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
