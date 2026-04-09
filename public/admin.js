@@ -1,14 +1,54 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("departmentsContainer");
   const clearBtn = document.getElementById("clearAllBtn");
+  const userWelcome = document.getElementById("userWelcome");
+  const logoutBtn = document.getElementById("logoutBtn");
   const socket = io();
 
+  let userDept = 'All';
+  let userRole = 'doctor';
+
   const DEPARTMENTS = ["Cardiology", "Orthopedic", "Neurology", "Dermatology", "General", "Emergency"];
+
+  // Auth check
+  async function checkAuth() {
+    const res = await fetch('/auth/me');
+    if (res.status !== 200) {
+      window.location.href = 'staff-login.html';
+      return;
+    }
+    const user = await res.json();
+    if (user.role !== 'doctor' && user.role !== 'admin') {
+      window.location.href = 'index.html';
+      return;
+    }
+    
+    userWelcome.textContent = `Hello, ${user.role === 'admin' ? 'Admin' : 'Dr.'} ${user.username}`;
+    userDept = user.department;
+    userRole = user.role;
+
+    if (userRole === 'admin') {
+        const staffSec = document.getElementById("staffSection");
+        if(staffSec) staffSec.classList.remove("hidden");
+        loadStaffRoster();
+    }
+
+    renderSkeleton();
+  }
+
+  checkAuth();
+
+  logoutBtn.addEventListener('click', async () => {
+    await fetch('/auth/logout', { method: 'POST' });
+    window.location.href = 'staff-login.html';
+  });
 
   // Render Skeleton
   function renderSkeleton() {
     container.innerHTML = "";
     DEPARTMENTS.forEach(dept => {
+      // Admin sees everything. Doctor only sees their own.
+      if (userRole !== 'admin' && userDept !== 'All' && userDept !== dept) return;
       const card = document.createElement("div");
       card.className = "dept-card";
       card.id = `dept-${dept}`;
@@ -49,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.on('queueUpdates', (queues) => {
     DEPARTMENTS.forEach(dept => {
+      if (userRole !== 'admin' && userDept !== 'All' && userDept !== dept) return;
       const waitList = queues[dept] || [];
       const listEl = document.getElementById(`list-${dept}`);
       const countEl = document.getElementById(`count-${dept}`);
@@ -74,6 +115,25 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  async function loadStaffRoster() {
+    try {
+      const res = await fetch('/admin/staff');
+      const staff = await res.json();
+      const listEl = document.getElementById('staffList');
+      if (listEl) {
+        listEl.innerHTML = staff.map(s => `
+          <div class="staff-pill ${s.role}">
+            <div class="staff-info">
+              <strong>${s.username}</strong>
+              <span>${s.department}</span>
+            </div>
+            <span class="role-tag">${s.role}</span>
+          </div>
+        `).join("");
+      }
+    } catch (err) { console.error(err); }
+  }
 
   renderSkeleton();
 });

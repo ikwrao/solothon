@@ -3,6 +3,69 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = document.getElementById("submitBtn");
   const btnText = document.querySelector(".btn-text");
   const loader = document.querySelector(".loader");
+  const historyContainer = document.getElementById("historyContainer");
+  const userWelcome = document.getElementById("userWelcome");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  // Auth Check
+  async function checkAuth() {
+    try {
+      const res = await fetch('/auth/me');
+      if (res.status === 401) {
+        window.location.href = 'patient-login.html';
+        return;
+      }
+      const user = await res.json();
+      if (userWelcome) {
+        userWelcome.textContent = `Hello, ${user.username}`;
+        userWelcome.classList.remove('hidden');
+      }
+      if (user.role === 'doctor' && document.getElementById('adminLink')) {
+        document.getElementById('adminLink').classList.remove('hidden');
+      }
+      if (logoutBtn) logoutBtn.classList.remove('hidden');
+      if (document.getElementById('patientName')) {
+        document.getElementById('patientName').value = user.username;
+      }
+      loadHistory();
+    } catch (err) {
+      window.location.href = 'patient-login.html';
+    }
+  }
+
+  checkAuth();
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      await fetch('/auth/logout', { method: 'POST' });
+      window.location.href = 'patient-login.html';
+    });
+  }
+
+  async function loadHistory() {
+    try {
+      const res = await fetch('/history');
+      const history = await res.json();
+      if (!historyContainer) return;
+
+      if (history.length === 0) {
+        historyContainer.innerHTML = '<div class="stat-item">No past records found.</div>';
+        return;
+      }
+
+      historyContainer.innerHTML = history.map(h => `
+        <div class="stat-item history-item">
+          <div class="history-main">
+            <span class="history-dept">${h.department}</span>
+            <span class="history-date">${new Date(h.createdAt).toLocaleDateString()}</span>
+          </div>
+          <div class="history-reason">${h.complaint.substring(0, 30)}...</div>
+        </div>
+      `).join('');
+    } catch (err) {
+      console.error('Failed to load history');
+    }
+  }
   
   const formSection = document.getElementById("formSection");
   const resultPanel = document.getElementById("resultPanel");
@@ -108,7 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Triage failed");
+      
+      if (response.status === 401) {
+        alert("Session expired. Please login again.");
+        window.location.href = "patient-login.html";
+        return;
+      }
+      
+      if (!response.ok) throw new Error(data.error || data.message || "Triage failed");
       
       displayResults(data);
       
@@ -141,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       ticketId.textContent = data.patientId;
       deptValue.textContent = data.department;
-      priorityValue.textContent = data.priorityScore || 0;
+      priorityValue.textContent = `${data.priorityScore}/10`;
       waitTimeValue.textContent = data.waitTime || "0";
       queuePos.textContent = data.yourPosition || "1";
       totalQueue.textContent = data.patientsInQueue || "0";
@@ -153,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
       else confidencePill.classList.add("low");
       
       reasonText.textContent = data.reason || "";
+      loadHistory(); // Refresh history after submission
     }
   }
 
@@ -175,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // EMERGENCY MODAL LOGIC
   const emergencyModal = document.getElementById("emergencyModal");
-  const emergencyTrigger = document.getElementById("emergencyTrigger");
   const closeEmergency = document.getElementById("closeEmergency");
   const acknowledgeBtn = document.getElementById("acknowledgeBtn");
 
@@ -189,7 +259,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "auto";
   }
 
-  if (emergencyTrigger) emergencyTrigger.addEventListener("click", openEmergencyModal);
   if (closeEmergency) closeEmergency.addEventListener("click", closeEmergencyModal);
   if (acknowledgeBtn) acknowledgeBtn.addEventListener("click", closeEmergencyModal);
 

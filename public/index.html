@@ -7,7 +7,7 @@
   <title>Patient Portal - City District Hospital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -19,14 +19,9 @@
   <div class="app-wrapper">
     <header class="top-navbar">
       <div class="top-left">
-        <div class="guide-tab">
-          <span class="guide-icon">ℹ️</span>
-          <div class="guide-content">
-            <strong>Quick Guide:</strong> Describe symptoms ➜ AI Triage ➜ Get Ticket
-          </div>
-        </div>
+        <span id="userWelcome" class="user-pill hidden"></span>
       </div>
-      
+
       <div class="top-center">
         <div class="hospital-logo">
           <span class="logo-plus">✚</span>
@@ -35,9 +30,7 @@
       </div>
 
       <div class="top-right">
-        <button id="emergencyTrigger" class="emergency-btn-top">
-          <span class="blink">🚨</span> Emergency Support
-        </button>
+        <button id="logoutBtn" class="btn-secondary hidden">Logout</button>
       </div>
     </header>
 
@@ -50,7 +43,7 @@
       <div class="portal-grid">
         <!-- Main Panel -->
         <div class="panel-left">
-          
+
           <div id="checkinView">
             <div id="formSection" class="glass-panel portal-card">
               <form id="complaintForm" class="complaint-form">
@@ -78,7 +71,8 @@
 
                 <div class="input-group">
                   <label for="complaintText">Describe your symptoms:</label>
-                  <textarea id="complaintText" rows="4" placeholder="e.g. My chest is hurting and I feel short of breath..." required></textarea>
+                  <textarea id="complaintText" rows="4"
+                    placeholder="e.g. My chest is hurting and I feel short of breath..." required></textarea>
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-primary">
@@ -130,6 +124,17 @@
               <button id="resetBtn" class="btn-secondary">New Triage Request</button>
             </div>
           </div>
+
+          <!-- Past Visit Records (Moved to Left) -->
+          <div class="info-card history-card" id="historyCard" style="margin-top: 20px;">
+            <div class="card-header">
+              <h3>Your Past Visits</h3>
+            </div>
+            <div id="historyContainer" class="history-list">
+              <!-- Dynamically populated -->
+              <div class="stat-item">No past records found.</div>
+            </div>
+          </div>
         </div>
 
         <aside class="panel-right" id="rightInsightsPanel">
@@ -157,9 +162,10 @@
         </div>
         <div class="modal-body">
           <div class="emergency-notice">
-            <p><strong>If you are experiencing life-threatening symptoms, do not use the online checklist. Call for help immediately.</strong></p>
+            <p><strong>If you are experiencing life-threatening symptoms, do not use the online checklist. Call for help
+                immediately.</strong></p>
           </div>
-          
+
           <div class="hotline-grid">
             <div class="hotline-card">
               <span class="hl-label">General Emergency</span>
@@ -186,7 +192,7 @@
         </div>
       </div>
     </div>
-    
+
     <footer class="app-footer">
       <p>&copy; 2026 City District Hospital AI Portal | v4.0 Gemini Pro</p>
     </footer>

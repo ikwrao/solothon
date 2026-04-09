@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Registration - City District Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #f8fafc; }
+    .auth-container { max-width: 450px; margin: 60px auto; padding: 20px; }
+    .glass-card { background: white; padding: 40px; border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+    .auth-header { text-align: center; margin-bottom: 30px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #475569; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 1rem; background: white; }
+    .btn-auth { width: 100%; padding: 14px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .btn-auth:hover { background: #1e293b; transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="glass-card">
+      <div class="auth-header">
+        <h1>Staff Onboarding</h1>
+        <p>Register a New Staff Member</p>
+      </div>
+      <form id="registerForm">
+        <div class="form-group">
+          <label>Username / ID</label>
+          <input type="text" id="username" placeholder="Choose ID" required>
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select id="role">
+            <option value="doctor">Medical Doctor</option>
+            <option value="admin">System Administrator</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Assigned Department</label>
+          <select id="department">
+            <option value="All">All (Admin Only)</option>
+            <option value="General">General Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Orthopedic">Orthopedic</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Emergency">Emergency Room</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Temporary Passcode</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-auth">Register Member</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        username: document.getElementById('username').value,
+        role: document.getElementById('role').value,
+        department: document.getElementById('department').value,
+        password: document.getElementById('password').value
+      };
+
+      try {
+        const res = await fetch('/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('Staff member registered! They can now log in.');
+          window.location.href = 'staff-login.html';
+        } else {
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Registration failed.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+[
+  {
+    "disease": "Fungal infection",
+    "symptoms": ["itching", "skin_rash", "nodal_skin_eruptions", "dischromic_patches"],
+    "department": "Dermatology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Allergy",
+    "symptoms": ["continuous_sneezing", "shivering", "chills", "watering_from_eyes"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "GERD",
+    "symptoms": ["stomach_pain", "acidity", "ulcers_on_tongue", "vomiting", "cough", "chest_pain"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Chronic cholestasis",
+    "symptoms": ["itching", "vomiting", "yellowish_skin", "nausea", "loss_of_appetite", "abdominal_pain", "yellowing_of_eyes"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Drug Reaction",
+    "symptoms": ["itching", "skin_rash", "stomach_pain", "burning_micturition", "spotting_urination"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Peptic ulcer disease",
+    "symptoms": ["vomiting", "loss_of_appetite", "abdominal_pain", "passage_of_gases", "internal_itching"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "AIDS",
+    "symptoms": ["muscle_wasting", "patches_in_throat", "high_fever", "extra_marital_contacts"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Diabetes",
+    "symptoms": ["fatigue", "weight_loss", "restlessness", "lethargy", "irregular_sugar_level", "blurred_and_distorted_vision", "excessive_hunger", "increased_appetite", "polyuria"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Gastroenteritis",
+    "symptoms": ["vomiting", "sunken_eyes", "dehydration", "diarrhoea"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Bronchial Asthma",
+    "symptoms": ["fatigue", "cough", "high_fever", "breathlessness", "family_history", "mucoid_sputum"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hypertension",
+    "symptoms": ["headache", "chest_pain", "dizziness", "loss_of_balance", "lack_of_concentration"],
+    "department": "Cardiology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Migraine",
+    "symptoms": ["acidity", "indigestion", "headache", "blurred_and_distorted_vision", "excessive_hunger", "stiff_neck", "depression", "irritability", "visual_disturbances"],
+    "department": "Neurology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Cervical spondylosis",
+    "symptoms": ["back_pain", "dizziness", "loss_of_balance", "neck_pain", "weakness_of_limb", "stiff_neck"],
+    "department": "Orthopedic",
+    "isEmergency": false
+  },
+  {
+    "disease": "Paralysis (brain hemorrhage)",
+    "symptoms": ["vomiting", "headache", "weakness_of_one_body_side", "altered_sensorium"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Jaundice",
+    "symptoms": ["itching", "vomiting", "fatigue", "weight_loss", "high_fever", "yellowish_skin", "dark_urine", "abdominal_pain"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Malaria",
+    "symptoms": ["chills", "vomiting", "high_fever", "sweating", "headache", "nausea", "muscle_pain"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Chicken pox",
+    "symptoms": ["itching", "skin_rash", "fatigue", "high_fever", "headache", "loss_of_appetite", "mild_fever", "swelled_lymph_nodes", "malaise", "red_spots_over_body"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Dengue",
+    "symptoms": ["skin_rash", "chills", "joint_pain", "vomiting", "fatigue", "high_fever", "headache", "nausea", "loss_of_appetite", "pain_behind_the_eyes", "back_pain", "malaise", "muscle_pain", "red_spots_over_body"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Typhoid",
+    "symptoms": ["chills", "vomiting", "fatigue", "high_fever", "headache", "nausea", "constipation", "abdominal_pain", "diarrhoea", "toxic_look_(typhos)"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "hepatitis A",
+    "symptoms": ["joint_pain", "vomiting", "yellowish_skin", "dark_urine", "nausea", "loss_of_appetite", "abdominal_pain", "diarrhoea", "mild_fever", "yellowing_of_eyes"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hepatitis B",
+    "symptoms": ["itching", "fatigue", "lethargy", "yellowish_skin", "dark_urine", "loss_of_appetite", "abdominal_pain", "yellowing_of_eyes", "malaise", "receiving_blood_transfusion", "receiving_unsterile_injections"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hepatitis C",
+    "symptoms": ["fatigue", "yellowish_skin", "nausea", "loss_of_appetite", "yellowing_of_eyes", "family_history"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hepatitis D",
+    "symptoms": ["joint_pain", "vomiting", "fatigue", "yellowish_skin", "dark_urine", "nausea", "loss_of_appetite", "abdominal_pain", "yellowing_of_eyes"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hepatitis E",
+    "symptoms": ["joint_pain", "vomiting", "fatigue", "high_fever", "yellowish_skin", "dark_urine", "nausea", "loss_of_appetite", "abdominal_pain", "yellowing_of_eyes", "acute_liver_failure", "coma", "stomach_bleeding"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Alcoholic hepatitis",
+    "symptoms": ["vomiting", "yellowish_skin", "abdominal_pain", "swelling_of_stomach", "distention_of_abdomen", "history_of_alcohol_consumption", "fluid_overload"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Tuberculosis",
+    "symptoms": ["chills", "vomiting", "fatigue", "weight_loss", "cough", "high_fever", "breathlessness", "sweating", "loss_of_appetite", "mild_fever", "yellowing_of_eyes", "swelled_lymph_nodes", "malaise", "phlegm", "chest_pain", "blood_in_sputum"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Common Cold",
+    "symptoms": ["continuous_sneezing", "chills", "fatigue", "cough", "high_fever", "headache", "swelled_lymph_nodes", "malaise", "phlegm", "throat_irritation", "redness_of_eyes", "sinus_pressure", "runny_nose", "congestion", "chest_pain", "loss_of_smell", "muscle_pain"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Pneumonia",
+    "symptoms": ["chills", "fatigue", "cough", "high_fever", "breathlessness", "sweating", "malaise", "phlegm", "chest_pain", "fast_heart_rate", "rusty_sputum"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Dimorphic hemmorhoids(piles)",
+    "symptoms": ["constipation", "pain_during_bowel_movements", "pain_in_anal_region", "bloody_stool", "irritation_in_anus"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Heart attack",
+    "symptoms": ["vomiting", "breathlessness", "sweating", "chest_pain"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Varicose veins",
+    "symptoms": ["fatigue", "cramps", "bruising", "obesity", "swollen_legs", "swollen_blood_vessels", "prominent_veins_on_calf", "fatigue_in_legs"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hypothyroidism",
+    "symptoms": ["fatigue", "weight_gain", "cold_hands_and_feets", "mood_swings", "lethargy", "dizziness", "puffy_face_and_eyes", "enlarged_thyroid", "brittle_nails", "swollen_extremeties", "depression", "irritability", "abnormal_menstruation"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hyperthyroidism",
+    "symptoms": ["fatigue", "weight_loss", "restlessness", "sweating", "diarrhoea", "fast_heart_rate", "excessive_hunger", "muscle_weakness", "irritability", "abnormal_menstruation"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Hypoglycemia",
+    "symptoms": ["vomiting", "fatigue", "anxiety", "sweating", "headache", "nausea", "blurred_and_distorted_vision", "excessive_hunger", "drying_and_tingling_lips", "slurred_speech", "irritability", "palpitations"],
+    "department": "Emergency",
+    "isEmergency": true
+  },
+  {
+    "disease": "Osteoarthristis",
+    "symptoms": ["joint_pain", "neck_pain", "knee_pain", "hip_joint_pain", "swelling_joints", "painful_walking"],
+    "department": "Orthopedic",
+    "isEmergency": false
+  },
+  {
+    "disease": "Arthritis",
+    "symptoms": ["muscle_weakness", "stiff_neck", "swelling_joints", "movement_stiffness", "painful_walking"],
+    "department": "Orthopedic",
+    "isEmergency": false
+  },
+  {
+    "disease": "(vertigo) Paroymsal  Positional Vertigo",
+    "symptoms": ["vomiting", "headache", "nausea", "spinning_movements", "loss_of_balance", "unsteadiness"],
+    "department": "Neurology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Acne",
+    "symptoms": ["skin_rash", "pus_filled_pimples", "blackheads", "scurring"],
+    "department": "Dermatology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Urinary tract infection",
+    "symptoms": ["burning_micturition", "bladder_discomfort", "foul_smell_of_urine", "continuous_feel_of_urine"],
+    "department": "General",
+    "isEmergency": false
+  },
+  {
+    "disease": "Psoriasis",
+    "symptoms": ["skin_rash", "joint_pain", "skin_peeling", "silver_like_dusting", "small_dents_in_nails", "inflammatory_nails"],
+    "department": "Dermatology",
+    "isEmergency": false
+  },
+  {
+    "disease": "Impetigo",
+    "symptoms": ["skin_rash", "high_fever", "blister", "red_sore_around_nose", "yellow_crust_ooze"],
+    "department": "Dermatology",
+    "isEmergency": false
+  }
+]

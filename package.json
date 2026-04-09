@@ -14,11 +14,15 @@
   "dependencies": {
     "@google/genai": "^1.48.0",
     "@google/generative-ai": "^0.24.1",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "fuse.js": "^7.3.0",
+    "natural": "^8.1.1",
     "socket.io": "^4.8.3",
-    "sqlite3": "^6.0.1"
+    "sqlite3": "^6.0.1",
+    "uuid": "^13.0.0"
   }
 }

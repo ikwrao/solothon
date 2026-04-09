@@ -3,28 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title>Hospital Admin - Queues</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="admin.css">
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <div class="background-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-  </div>
+  <div class="app-wrapper">
+    <header class="top-navbar">
+      <div class="top-left">
+        <span id="userWelcome" class="user-pill"></span>
+      </div>
+      
+      <div class="top-center">
+        <div class="hospital-logo">
+          <span class="logo-plus">✚</span>
+          <span>Admin Command Center</span>
+        </div>
+      </div>
 
-  <main class="container admin-container">
-    <header class="glass-header">
-      <h1>Admin Dashboard</h1>
-      <p>Live Department Queues</p>
-      <button id="clearAllBtn" class="btn-secondary" style="margin-top: 10px; width: auto; padding: 8px 16px;">Clear All Queues (Reset)</button>
+      <div class="top-right">
+        <a href="index.html" class="btn-secondary" style="margin-right: 15px; text-decoration: none;">← Patient Portal</a>
+        <button id="logoutBtn" class="btn-secondary">Logout</button>
+      </div>
     </header>
+
+    <main class="main-portal admin-container">
+      <header class="page-intro" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Live Hospital Management & Queue Orchestration</p>
+        </div>
+        <button id="clearAllBtn" class="btn-secondary" style="border-color: #fecaca; color: #be185d;">Clear All Queues</button>
+      </header>
+
+    <div id="staffSection" class="portal-card hidden" style="margin-bottom: 20px; border-left: 5px solid var(--accent-action);">
+      <div class="card-header">
+        <h3>👩‍⚕️ Medical Staff Roster</h3>
+        <span class="live-tag">Online</span>
+      </div>
+      <div id="staffList" class="staff-roster-grid">
+        <!-- Staff members here -->
+      </div>
+    </div>
 
     <div id="departmentsContainer" class="departments-grid">
       <!-- Generated via JS -->
     </div>
-  </main>
+    </main>
+    
+    <footer class="app-footer">
+      <p>&copy; 2026 Admin Management Portal | v5.0 Secure Access</p>
+    </footer>
+  </div>
 
   <script src="admin.js"></script>
 </body>

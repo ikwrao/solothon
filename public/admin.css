@@ -1,139 +1,131 @@
 .admin-container {
-  max-width: 1200px;
+  max-width: 1100px;
 }
 
 .departments-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
 }
 
 .dept-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 12px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .dept-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #f1f5f9;
-  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
 }
 
 .dept-name {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .queue-count {
-  background: #ecfdf5;
-  color: #065f46;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-weight: 800;
-  font-size: 0.85rem;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.75rem;
 }
 
 .patient-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-height: 100px;
-  max-height: 400px;
+  gap: 8px;
+  min-height: 80px;
+  max-height: 350px;
   overflow-y: auto;
 }
 
-/* Custom scrollbar */
-.patient-list::-webkit-scrollbar { width: 6px; }
-.patient-list::-webkit-scrollbar-track { background: #f1f5f9; }
-.patient-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+/* Scrollbar */
+.patient-list::-webkit-scrollbar { width: 4px; }
+.patient-list::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
 
 .patient-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 14px;
-  position: relative;
-  transition: transform 0.2s;
-}
-
-.patient-card:hover {
-  transform: translateX(4px);
-  border-color: #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
 }
 
 .patient-card.emergency {
-  border: 2px solid #fecaca;
+  border: 1px solid #fecaca;
   background: #fff1f2;
 }
 
 .p-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.p-id {
-  font-weight: 800;
-  font-family: monospace;
-  color: #475569;
-}
+.p-id { font-weight: 700; font-family: monospace; font-size: 0.85rem; color: #64748b; }
+.p-score { font-size: 0.65rem; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
 
-.p-score {
-  font-size: 0.75rem;
-  background: #e2e8f0;
-  color: #475569;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-weight: 700;
-}
-
-.patient-card.emergency .p-score {
-  background: #f43f5e;
-  color: white;
-}
-
-.p-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.p-details {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin-top: 4px;
-  font-weight: 500;
-}
+.p-name { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+.p-details { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
 
 .next-btn {
-  background: #10b981;
+  background: #0f172a;
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 12px;
-  font-weight: 700;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: auto;
 }
 
-.next-btn:hover {
-  background: #059669;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+.next-btn:hover { opacity: 0.9; }
+.next-btn:disabled { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; }
+
+/* --- STAFF ROSTER --- */
+.staff-roster-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.next-btn:disabled {
-  background: #e2e8f0;
-  color: #94a3b8;
-  cursor: not-allowed;
-  box-shadow: none;
+.staff-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
+.staff-info { display: flex; flex-direction: column; }
+.staff-info strong { color: #1e293b; font-size: 0.85rem; }
+.staff-info span { color: #64748b; font-size: 0.75rem; }
+
+.role-tag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.staff-pill.admin .role-tag { color: #be185d; }
+.staff-pill.doctor .role-tag { color: #059669; }
+
+.hidden { display: none !important; }
